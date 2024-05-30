@@ -94,4 +94,14 @@ questions, answers = zip(*combined)
 
 # Generate the quiz
 print("Welcome to the General Knowledge Quiz!\n")
+for i in range(40):
+    print(f"Question {i+1}: {questions[i]}")
+    user_answer = input("Your Answer: ")
+    if user_answer.lower() == answers[i].lower():
+        print("Correct!")
+    else:
+        print(f"Wrong! The correct answer is {answers[i]}")
+    print()
+
+print("Quiz completed! Thanks for participating!")
 
