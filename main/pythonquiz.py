@@ -87,4 +87,11 @@ answers = [
     "C6H12O6"
 ]
 
+# Shuffle the questions and answers
+combined = list(zip(questions, answers))
+random.shuffle(combined)
+questions, answers = zip(*combined)
+
+# Generate the quiz
+print("Welcome to the General Knowledge Quiz!\n")
 
