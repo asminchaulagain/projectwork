@@ -2,7 +2,7 @@ import random
 
 # Questions and Answers
 questions = [
-    "What is the capital city of Australia?",
+    "What is the capital city of nepal?",
     "Who painted the Mona Lisa?",
     "In which year did the Titanic sink?",
     "What is the largest organ in the human body?",
@@ -45,7 +45,7 @@ questions = [
 ]
 
 answers = [
-    "Canberra",
+    "kathamndu",
     "Leonardo da Vinci",
     "1912",
     "Skin",
