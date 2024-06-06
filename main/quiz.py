@@ -4,7 +4,7 @@ from tkinter import messagebox
 import threading
 
 questions = [
-    "What is the capital city of australia?",
+    "What is the capital city of bangladesh?",
     "Who painted the Mona Lisa?",
     "In which year did the Titanic sink?",
     "What is the largest organ in the human body?",
@@ -47,7 +47,7 @@ questions = [
 ]
 
 answers = [
-    "canberra",
+    "dhaka",
     "Leonardo da Vinci",
     "1912",
     "Skin",
