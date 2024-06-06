@@ -126,6 +126,7 @@ def exit_quiz():
 
 root = tk.Tk()
 root.title("General Knowledge Quiz")
+root.protocol("WM_DELETE_WINDOW",exit_quiz)
 
 question_label = tk.Label(root, text="")
 answer_entry = tk.Entry(root)
