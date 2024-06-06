@@ -42,7 +42,7 @@ questions = [
     "What is the speed of light in a vacuum (approximately)?",
     "Who is known as the 'Father of Geometry'?",
     "Which ocean is the largest by surface area?",
-    "What is the capital city of South Africa?",
+    "What is the capital city of india?",
     "What is the chemical formula for glucose?"
 ]
 
@@ -85,7 +85,7 @@ answers = [
     "299,792,458 meters per second",
     "Euclid",
     "Pacific Ocean",
-    "Pretoria (Executive), Bloemfontein (Judicial), Cape Town (Legislative)",
+    "delhi",
     "C6H12O6"
 ]
 
