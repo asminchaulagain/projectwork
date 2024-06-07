@@ -96,10 +96,8 @@ questions, answers = zip(*combined)
 def display_question(index):
     question_label.config(text=f"Question {index + 1}: {questions[index]}")
     answer_entry.delete(0, tk.END)
-    global timer_thread
-    timer_thread = threading.Timer(10.0, next_question)
-    timer_thread.start()
-
+    root.after(10000, next_question)
+  
 def check_answer():
     global timer_thread
     timer_thread.cancel()
@@ -122,7 +120,10 @@ def next_question():
         messagebox.showinfo("Quiz Completed", "Quiz completed! Thanks for participating!")
 
 def exit_quiz():
-    root.destroy()
+    if self.timer_thread:
+        self.timer_thread.cancel()
+    self.root.destroy()
+
 
 root = tk.Tk()
 root.title("General Knowledge Quiz")
