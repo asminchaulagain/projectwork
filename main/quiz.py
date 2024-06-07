@@ -4,11 +4,11 @@ from tkinter import messagebox
 import threading
 
 questions = [
-    "What is the capital city of india?",
+    "What is the capital city of India?",
     "Who painted the Mona Lisa?",
     "In which year did the Titanic sink?",
     "What is the largest organ in the human body?",
-    "What is the chemical symbol for the gold?",
+    "What is the chemical symbol for gold?",
     "Who wrote the novel 'To Kill a Mockingbird'?",
     "Which planet is known as the 'Red Planet'?",
     "What is the tallest mountain in the world?",
@@ -16,7 +16,7 @@ questions = [
     "What is the chemical formula for water?",
     "Which famous scientist developed the theory of relativity?",
     "Who wrote the play 'Romeo and Juliet'?",
-    "What is the capital city of china?",
+    "What is the capital city of China?",
     "Which element has the atomic number 6?",
     "Who is the current president of the United States (as of 2024)?",
     "Which continent is the largest by land area?",
@@ -42,12 +42,33 @@ questions = [
     "What is the speed of light in a vacuum (approximately)?",
     "Who is known as the 'Father of Geometry'?",
     "Which ocean is the largest by surface area?",
-    "What is the capital city of india?",
-    "What is the chemical formula for glucose?"
+    "What is the capital city of India?",
+    "What is the chemical formula for glucose?",
+    # Additional questions
+    "What is the currency of Japan?",
+    "Who wrote 'Pride and Prejudice'?",
+    "What is the capital city of Australia?",
+    "What is the chemical symbol for potassium?",
+    "Who painted 'The Persistence of Memory'?",
+    "Which gas is most abundant in Earth's atmosphere?",
+    "What is the largest desert in the world?",
+    "Who invented the telephone?",
+    "What is the chemical formula for sulfuric acid?",
+    "Who discovered the law of gravity?",
+    "What is the smallest country in the world?",
+    "Who composed the opera 'The Marriage of Figaro'?",
+    "What is the capital city of Russia?",
+    "What is the chemical symbol for helium?",
+    "Who was the first person to step on the moon?",
+    "What is the hottest planet in our solar system?",
+    "Who wrote 'The Great Gatsby'?",
+    "Which animal is known as the 'King of the Jungle'?",
+    "What is the chemical formula for carbon dioxide?",
+    "What is the largest country by land area?"
 ]
 
 answers = [
-    "delhi",
+    "Delhi",
     "Leonardo da Vinci",
     "1912",
     "Skin",
@@ -59,7 +80,7 @@ answers = [
     "H2O",
     "Albert Einstein",
     "William Shakespeare",
-    "bejing",
+    "Beijing",
     "Carbon",
     "Varies (based on current president)",
     "Asia",
@@ -85,22 +106,49 @@ answers = [
     "299,792,458 meters per second",
     "Euclid",
     "Pacific Ocean",
-    "delhi",
-    "C6H12O6"
+    "Delhi",
+    "C6H12O6",
+    # Additional answers
+    "Yen",
+    "Jane Austen",
+    "Canberra",
+    "K",
+    "Salvador Dalí",
+    "Nitrogen",
+    "Sahara",
+    "Alexander Graham Bell",
+    "H2SO4",
+    "Isaac Newton",
+    "Vatican City",
+    "Wolfgang Amadeus Mozart",
+    "Moscow",
+    "He",
+    "Neil Armstrong",
+    "Venus",
+    "F. Scott Fitzgerald",
+    "Lion",
+    "CO2",
+    "Russia"
 ]
 
 combined = list(zip(questions, answers))
 random.shuffle(combined)
 questions, answers = zip(*combined)
 
+timer_thread = None
+current_index = 0
+
 def display_question(index):
     question_label.config(text=f"Question {index + 1}: {questions[index]}")
     answer_entry.delete(0, tk.END)
-    root.after(10000, next_question)
-  
+    global timer_thread
+    timer_thread = threading.Timer(10, next_question)
+    timer_thread.start()
+
 def check_answer():
     global timer_thread
-    timer_thread.cancel()
+    if timer_thread:
+        timer_thread.cancel()
     user_answer = answer_entry.get()
     if user_answer.lower() == answers[current_index].lower():
         messagebox.showinfo("Result", "Correct!")
@@ -120,28 +168,24 @@ def next_question():
         messagebox.showinfo("Quiz Completed", "Quiz completed! Thanks for participating!")
 
 def exit_quiz():
-    if self.timer_thread:
-        self.timer_thread.cancel()
-    self.root.destroy()
-
+    global timer_thread
+    if timer_thread:
+        timer_thread.cancel()
+    root.destroy()
 
 root = tk.Tk()
 root.title("General Knowledge Quiz")
-root.protocol("WM_DELETE_WINDOW",exit_quiz)
+root.protocol("WM_DELETE_WINDOW", exit_quiz)
 
 question_label = tk.Label(root, text="")
 answer_entry = tk.Entry(root)
-submit_button = tk.Button(root, text="Submit", command=check_answer, bg="green")
-next_button = tk.Button(root, text="Next", command=next_question)
-exit_button = tk.Button(root, text="Exit", command=exit_quiz, bg="red")
+submit_button = tk.Button(root, text="Submit", command=check_answer,
+                          width=10, padx=10, pady=5)
 
 question_label.pack(pady=10)
 answer_entry.pack(pady=5)
 submit_button.pack(pady=5)
-next_button.pack(pady=5)
-exit_button.pack(pady=5)
 
-current_index = 0
 display_question(current_index)
 
 root.mainloop()
