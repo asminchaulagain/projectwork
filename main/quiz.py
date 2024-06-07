@@ -4,11 +4,11 @@ from tkinter import messagebox
 import threading
 
 questions = [
-    "What is the capital city of bangladesh?",
+    "What is the capital city of india?",
     "Who painted the Mona Lisa?",
     "In which year did the Titanic sink?",
     "What is the largest organ in the human body?",
-    "What is the chemical symbol for gold?",
+    "What is the chemical symbol for the gold?",
     "Who wrote the novel 'To Kill a Mockingbird'?",
     "Which planet is known as the 'Red Planet'?",
     "What is the tallest mountain in the world?",
@@ -47,7 +47,7 @@ questions = [
 ]
 
 answers = [
-    "dhaka",
+    "delhi",
     "Leonardo da Vinci",
     "1912",
     "Skin",
