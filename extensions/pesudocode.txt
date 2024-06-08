@@ -1,0 +1,79 @@
+import tkinter as tk
+from tkinter import messagebox
+import threading
+import time
+
+questions = [...]  # List of questions
+answers = [...]  # List of corresponding answers
+
+current_index = 0
+timer_thread = None
+time_limit = 10
+
+def display_question(index):
+    # Display the question
+    question_label.config(text=f"Question {index + 1}: {questions[index]}")
+    answer_entry.delete(0, tk.END)
+    # Start the countdown timer
+    start_timer()
+
+def start_timer():
+    remaining_time = time_limit
+    def countdown():
+        nonlocal remaining_time
+        while remaining_time > 0:
+            time_label.config(text=f"Time left: {remaining_time} seconds")
+            time.sleep(1)
+            remaining_time -= 1
+        if remaining_time == 0:
+            time_up()
+    global timer_thread
+    timer_thread = threading.Thread(target=countdown)
+    timer_thread.start()
+
+def time_up():
+    messagebox.showerror("Time Up", "Time is up for this question!")
+    next_question()
+
+def check_answer():
+    global timer_thread
+    if timer_thread.is_alive():
+        timer_thread.join()
+    user_answer = answer_entry.get()
+    if user_answer.lower() == answers[current_index].lower():
+        messagebox.showinfo("Result", "Correct!")
+    else:
+        messagebox.showerror("Result", f"Wrong! The correct answer is {answers[current_index]}")
+    next_question()
+
+def next_question():
+    global current_index
+    current_index += 1
+    if current_index < len(questions):
+        display_question(current_index)
+    else:
+        messagebox.showinfo("Quiz Completed", "Quiz completed! Thanks for participating!")
+
+def exit_quiz():
+    global timer_thread
+    if timer_thread.is_alive():
+        timer_thread.join()
+    root.destroy()
+
+root = tk.Tk()
+root.title("Timed Quiz")
+root.protocol("WM_DELETE_WINDOW", exit_quiz)
+
+question_label = tk.Label(root, text="")
+time_label = tk.Label(root, text="")
+answer_entry = tk.Entry(root)
+submit_button = tk.Button(root, text="Submit", command=check_answer, width=10, padx=10, pady=5)
+
+question_label.pack(pady=10)
+time_label.pack(pady=10)
+answer_entry.pack(pady=5)
+submit_button.pack(pady=5)
+
+display_question(current_index)
+
+root.mainloop()
